@@ -443,7 +443,7 @@ const renderPizzaCard = (pizza) => {
         </div>
         <div class="pizza-img-container shadow-inner">
             <img src="${pizza.img}" alt="${pizza.name}" class="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" 
-                 onerror="this.src='assets/logo2.webp'">
+                 onerror="this.src='assets/logoholy.webp'">
         </div>
     `;
     return card;
@@ -468,7 +468,7 @@ const renderDrinkCard = (drink) => {
         </div>
         <div class="pizza-img-container shadow-inner">
             <img src="${drink.img}" alt="${drink.name}" class="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500"
-                 onerror="this.src='assets/logo2.webp'">
+                 onerror="this.src='assets/logoholy.webp'">
         </div>
     `;
     return card;
@@ -520,7 +520,7 @@ function renderHalfFlavors() {
         <div onclick="selectFlavor(${pizza.id})" id="flavor-card-${pizza.id}" class="flavor-card shadow-sm">
             <div class="flavor-card-img-container">
                 <img src="${pizza.img}" alt="${pizza.name}" class="flavor-card-img" 
-                     onerror="this.src='assets/logo2.webp'">
+                     onerror="this.src='assets/logoholy.webp'">
             </div>
             <div class="flavor-card-body">
                 <span class="flavor-card-name">${pizza.name}</span>
@@ -677,7 +677,7 @@ function openProductModal(item) {
     // Preencher dados básicos
     modalImg.src = item.img;
     modalImg.onerror = () => {
-        modalImg.src = 'assets/logo2.webp';
+        modalImg.src = 'assets/logoholy.webp';
     };
     modalName.textContent = item.name.toUpperCase();
     modalDesc.textContent = item.desc;

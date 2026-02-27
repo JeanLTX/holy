@@ -9,7 +9,7 @@
     <title>Holy - Pizza Napolitana - Cardápio Online</title>
 
     <!-- Favicons -->
-    <link rel="icon" type="image/png" href="assets/logo2.png">
+
 
     <!-- Tailwind CSS (via Import) & Custom Styles -->
     <link href="./style.css" rel="stylesheet">
@@ -29,15 +29,14 @@
     <header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-colors">
         <div class="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center gap-5">
-                <img src="assets/logo2.PNG" alt="Logo" class="w-16 h-16 md:w-14 md:h-14 object-contain drop-shadow-sm">
-                <h1 class="site-title text-2xl md:text-3xl font-bold text-white tracking-widest font-great-vibes pt-1">
+                <h1 class="site-title text-2xl md:text-3xl font-bold text-black tracking-widest font-great-vibes pt-1">
                     Holy</h1>
             </div>
 
             <div class="relative">
                 <button onclick="toggleCartDrawer()"
                     class="p-2 hover:bg-white/10 rounded-full transition-colors relative">
-                    <i data-lucide="shopping-cart" class="site-cart-icon text-white w-6 h-6"></i>
+                    <i data-lucide="shopping-cart" class="site-cart-icon text-black w-6 h-6"></i>
                     <span id="header-cart-count"
                         class="hidden absolute top-0 right-0 bg-orange-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">0</span>
                 </button>
@@ -49,28 +48,24 @@
     <section class="relative w-full h-screen md:min-h-[420px] h-screen-fix">
         <!-- Imagem de fundo -->
         <picture class="absolute inset-0">
-            <!-- Mobile & Desktop: bannerholy.webp -->
-            <source srcset="assets/bannerholy.webp">
-            <!-- Fallback -->
-            <img src="assets/bannerholy.webp" alt="Banner Holy - Pizza Napolitana" class="w-full h-full object-cover">
+            <!-- Desktop -->
+            <source media="(min-width: 768px)" srcset="assets/bannerholy.webp">
+            <!-- Mobile/Fallback -->
+            <img src="assets/bannerholymob.webp" alt="Banner Holy - Pizza Napolitana"
+                class="w-full h-full object-cover">
         </picture>
 
         <!-- Overlay -->
         <div class="absolute inset-0" style="background-color: rgba(0, 0, 0, 0.2);"></div>
 
-        <!-- Conteúdo central -->
-        <div class="relative z-10 w-full h-full flex items-center justify-center px-6 py-20">
-            <div class="max-w-2xl text-center flex flex-col items-center">
-                <!--<p class="text-white text-lg md:text-xl mb-8 opacity-100"
-                    style="font-family: 'Fraunces', serif; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
-                    Escolha sua pizza favorita e monte seu pedido em poucos cliques
-                </p>-->
-                <button id="cta-order-btn"
-                    class="cta-btn bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 rounded-full text-lg font-bold flex items-center gap-2 shadow-lg">
-                    <span>Fazer Pedido</span>
-                    <i data-lucide="chevron-down" class="w-5 h-5"></i>
-                </button>
-            </div>
+        <!-- Conteúdo do botão - Forçado no CSS fixado com estilos embutidos caso Tailwind não rode -->
+        <div class="absolute z-40 w-max" style="bottom: 2.5rem; left: 50%; transform: translateX(-50%);">
+            <button id="cta-order-btn"
+                class="cta-btn bg-orange-600 hover:bg-orange-700 text-white px-10 py-4 rounded-full text-xl font-bold flex items-center gap-2 shadow-2xl transition-all"
+                style="margin-top: 0;">
+                <span>Fazer Pedido</span>
+                <i data-lucide="chevron-down" class="w-6 h-6"></i>
+            </button>
         </div>
     </section>
 
