@@ -1,0 +1,473 @@
+@import 'tailwindcss';
+
+/* Custom Styles - Holy - Pizza Napolitana */
+
+:root {
+    --brand-primary: #000000;
+    --brand-dark: #111827;
+    --bg-white: #ffffff;
+}
+
+@theme {
+    --color-orange-50: #ffffff;
+    --color-orange-100: #f9fafb;
+    --color-orange-200: #f3f4f6;
+    --color-orange-300: #e5e7eb;
+    --color-orange-400: #d1d5db;
+    --color-orange-500: #111827;
+    --color-orange-600: #000000;
+    --color-orange-700: #000000;
+    --color-orange-800: #000000;
+    --color-orange-900: #000000;
+    
+    --color-red-600: #111827;
+    --color-red-500: #1f2937;
+
+    --font-serif: 'Playfair Display', serif;
+}
+
+body {
+    background-color: var(--bg-white);
+    color: var(--brand-dark);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, .serif-font {
+    font-family: var(--font-serif);
+}
+
+.font-great-vibes {
+    font-family: 'Great Vibes', cursive;
+}
+
+.font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+}
+
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}
+
+/* ==========================================
+   ANIMAÇÕES
+=========================================== */
+@keyframes slideUp {
+    from { transform: translate(-50%, 100%); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+.toast-animate {
+    animation: slideUp 0.3s ease-out forwards;
+}
+
+@keyframes bounceDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+}
+
+/* ==========================================
+   COMPONENTES
+=========================================== */
+.pizza-card {
+    transition: all 0.3s ease;
+}
+
+.pizza-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-add:active {
+    transform: scale(0.98);
+}
+
+.pizza-img-container {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #f9fafb;
+    border: 1px solid #f3f4f6;
+}
+
+@media (max-width: 640px) {
+    .pizza-img-container {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+/* Componentes */
+
+@keyframes bounceInfinite {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.cta-btn {
+    will-change: transform, opacity;
+    opacity: 0; /* Começa invisível, GSAP controla a entrada */
+    visibility: hidden; /* GSAP seta visible */
+}
+
+/* Aplica bounce infinito APÓS a entrada */
+.cta-btn.loaded {
+    opacity: 1 !important; /* Force visibility */
+    animation: bounceInfinite 2s infinite ease-in-out;
+}
+
+/* Hover só funciona DEPOIS de carregado (.loaded) para não quebrar a entrada */
+.cta-btn.loaded:hover {
+    opacity: 1 !important;
+    animation: bounceDown 1.5s infinite;
+    transform: scale(1.05);
+}
+
+.cta-btn:focus {
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cta-btn { animation: none !important; transition: none !important; }
+}
+
+/* ==========================================
+   HEADER & NAVBAR
+=========================================== */
+#site-header { transition: all 0.3s ease; }
+
+#site-header.scrolled {
+    background-color: rgba(255,255,255,1);
+    border-bottom: 1px solid rgba(229,231,235,1);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+#site-header.scrolled .site-title { color: #111827 !important; }
+#site-header.scrolled .site-cart-icon { color: #374151 !important; }
+#site-header.scrolled .site-logo-letter { color: white; }
+
+/* ==========================================
+   BARRA DE CATEGORIAS (STICKY TAB BAR)
+=========================================== */
+#categories-bar {
+    position: sticky;
+    top: 64px;
+    background: linear-gradient(to right, #ffffff 0%, #ffffff 85%, transparent 100%);
+    z-index: 40;
+    box-shadow: none;
+    transition: box-shadow 0.3s ease;
+}
+
+#categories-bar.scrolled {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#categories-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 100%;
+    background: linear-gradient(to right, transparent 0%, #ffffff 100%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.category-tab {
+    flex-shrink: 0;
+    padding: 16px 20px;
+    white-space: nowrap;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    color: #6b7280;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    scroll-snap-align: center;
+}
+
+.category-tab:hover {
+    color: #000000;
+}
+
+.category-tab.active {
+    color: #000000;
+    border-bottom-color: #000000;
+}
+
+.category-section {
+    scroll-margin-top: 120px;
+}
+
+/* ==========================================
+   DRAWER (CARRINHO)
+=========================================== */
+#cart-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 90vw;
+    max-width: 450px;
+    background: #ffffff;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+    z-index: 50;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+#cart-drawer.open {
+    transform: translateX(0);
+}
+
+#cart-drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#cart-drawer-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Drawer Cart Item */
+.cart-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.cart-drawer-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+}
+
+.cart-item-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.cart-drawer-footer {
+    border-top: 1px solid #e5e7eb;
+    padding: 16px;
+    background: #f9fafb;
+}
+
+/* FAB */
+#cart-fab {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+}
+
+#cart-fab:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Checkout Modal */
+#checkout-section {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 60;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#checkout-section.open {
+    display: flex;
+}
+
+.checkout-container {
+    background: white;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 100%;
+    padding: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    /* Ensure it handles overflow on small screens */
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* ==========================================
+   NOVO SISTEMA DE MODAIS (HOLY)
+========================================== */
+
+.modal-header-fixed {
+    background: #000000;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.modal-content-scroll {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.modal-footer-fixed {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding: 1.5rem;
+    border-top: 1px solid #f3f4f6;
+    z-index: 20;
+}
+
+/* Meio a Meio Grid & Buttons */
+.half-size-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.half-size-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.25rem;
+    border: 2px solid #f3f4f6;
+    border-radius: 1.25rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.half-size-btn.active {
+    border-color: #000000;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.half-size-btn.active span:first-child {
+    color: #000000;
+}
+
+/* Flavor Cards */
+.flavor-card {
+    background: white;
+    border: 2px solid #f3f4f6;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.flavor-card:hover {
+    border-color: #e5e7eb;
+    transform: translateY(-2px);
+}
+
+.flavor-card.selected-1, 
+.flavor-card.selected-2 {
+    border-color: #000000;
+    background-color: #ffffff;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.flavor-card-img-container {
+    height: 100px;
+    background: #f9fafb;
+    overflow: hidden;
+}
+
+.flavor-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.flavor-card:hover .flavor-card-img {
+    transform: scale(1.1);
+}
+
+.flavor-card-body {
+    padding: 0.75rem;
+    text-align: center;
+}
+
+.flavor-card-name {
+    display: block;
+    font-weight: 800;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.flavor-card-desc {
+    font-size: 0.65rem;
+    color: #9ca3af;
+    display: block;
+    line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.selection-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: #000000;
+    color: white;
+    font-size: 9px;
+    font-weight: 900;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    display: none;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.selected-1 .selection-badge-1, 
+.selected-2 .selection-badge-2 {
+    display: block;
+}
+
+.btn-add-half {
+    background: #000000 !important;
+    color: white !important;
+    transition: all 0.3s ease;
+}
+
+.btn-add-half:hover {
+    background: #1f2937 !important;
+    transform: translateY(-2px);
+}
+
+.btn-add-half:disabled {
+    background: #e5e7eb !important;
+    color: #9ca3af !important;
+    cursor: not-allowed;
+    transform: none;
+}
