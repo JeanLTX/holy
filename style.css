@@ -1534,6 +1534,7 @@ h1, h2, h3, .serif-font {
   top: 0;
   right: 0;
   height: 100vh;
+  height: 100dvh;
   width: 90vw;
   max-width: 450px;
   background: #ffffff;
@@ -1582,6 +1583,7 @@ h1, h2, h3, .serif-font {
 .cart-drawer-footer {
   border-top: 1px solid #e5e7eb;
   padding: 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
   background: #f9fafb;
 }
 #cart-fab {
@@ -1613,6 +1615,8 @@ h1, h2, h3, .serif-font {
   padding: 24px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   max-height: 90vh;
+  max-height: 90dvh;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
   overflow-y: auto;
 }
 .modal-header-fixed {
