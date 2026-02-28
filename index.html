@@ -58,11 +58,10 @@
         <!-- Overlay -->
         <div class="absolute inset-0" style="background-color: rgba(0, 0, 0, 0.2);"></div>
 
-        <!-- Conteúdo do botão - Forçado no CSS fixado com estilos embutidos caso Tailwind não rode -->
-        <div class="absolute z-40 w-max" style="bottom: 2.5rem; left: 50%; transform: translateX(-50%);">
+        <!-- Botão Fazer Pedido - Posição controlada via CSS responsivo (hero-cta-wrapper) -->
+        <div class="hero-cta-wrapper">
             <button id="cta-order-btn"
-                class="cta-btn bg-orange-600 hover:bg-orange-700 text-white px-10 py-4 rounded-full text-xl font-bold flex items-center gap-2 shadow-2xl transition-all"
-                style="margin-top: 0;">
+                class="cta-btn bg-orange-600 hover:bg-orange-700 text-white px-10 py-4 rounded-full text-xl font-bold flex items-center gap-2 shadow-2xl transition-all">
                 <span>Fazer Pedido</span>
                 <i data-lucide="chevron-down" class="w-6 h-6"></i>
             </button>

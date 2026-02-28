@@ -1468,6 +1468,30 @@ h1, h2, h3, .serif-font {
     transition: none !important;
   }
 }
+
+/* Container do botão Hero - Ajuste para barra de busca mobile */
+.hero-cta-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  width: max-content;
+  
+  /* Mobile (Safari/Chrome bar fixes) */
+  bottom: calc(20% + env(safe-area-inset-bottom));
+}
+
+@media (min-width: 768px) {
+  .hero-cta-wrapper {
+    bottom: 25%; /* Pouco mais abaixo no desktop conforme pedido */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-cta-wrapper {
+    bottom: calc(100px + env(safe-area-inset-bottom)); /* Posição específica para telas menores */
+  }
+}
 #site-header {
   transition: all 0.3s ease;
 }
